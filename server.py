@@ -36,10 +36,10 @@ def hi():
 def memeber():
     db = pymysql.connect(
         host="localhost",  # 로컬이나 컴퓨터 ip주소
-        user='root',
-        password='1234',
+        user='do1',
+        password='do1',
         charset='utf8',
-        database='test')
+        database='python')
     cur = db.cursor()
     cur.execute("select * from member")
     rs = cur.fetchall()
@@ -52,23 +52,27 @@ def memebrform():
         print('get')
         pass
     elif request.method == 'POST':
-        email = request.form['email']
-        pwd= request.form['pwd']
-        name = request.form['name']
-        
-        db = pymysql.connect(
-            host="localhost", 
-            user='root',
-            password='1234',
-            charset='utf8',
-            database='test')
-        cur = db.cursor()
-        cur.execute(f'''insert into member 
-                    (email, password, name,regdate)
-                    values
-                    ('{email}','{pwd}','{name}',now());''')
-        db.commit()
-        cur.close()
+        try:
+            email = request.form['email']
+            pwd= request.form['pwd']
+            name = request.form['name']
+            
+            db = pymysql.connect(
+                host="localhost", 
+                user='root',
+                password='1234',
+                charset='utf8',
+                database='python')
+            cur = db.cursor()
+            cur.execute(f"""insert into member 
+                        (email, password, name,regdate)
+                        values
+                        ('{email}','{pwd}','{name}',now());""")
+        except Exception as e:
+            print(e)
+        finally:
+            db.commit()
+            cur.close()
 
     return render_template("memberform.html")
 
@@ -126,4 +130,4 @@ def aaa():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
