@@ -36,8 +36,8 @@ def hi():
 def memeber():
     db = pymysql.connect(
                 host="localhost", 
-                user='root',
-                password='1234',
+                user='do1',
+                password='do1',
                 charset='utf8',
                 database='python')
     cur = db.cursor()
@@ -60,8 +60,8 @@ def memebrform():
     elif request.method == 'POST':
         db = pymysql.connect(
                 host="localhost", 
-                user='root',
-                password='1234',
+                user='do1',
+                password='do1',
                 charset='utf8',
                 database='python')
         cur = db.cursor()
